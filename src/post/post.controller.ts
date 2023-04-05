@@ -1,21 +1,15 @@
+import { User } from 'src/decorator/user.decorator';
 import { CreatePost } from './dto/post.dto';
 import { PostService } from './post.service';
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Param,
-  Post,
-  Req,
-} from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 
 @Controller('post')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Get()
-  getPosts() {
+  getAllPosts(@User() user) {
+    console.log('user', user);
     return this.postService.getAllPosts();
   }
 
